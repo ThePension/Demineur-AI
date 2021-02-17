@@ -1,0 +1,9 @@
+Calculer des probabilités quand elle doit choisir une case au pif
+Faire en sorte que le premier coup ne tombe jamais sur une case avec une bombe : 
+--> SetBomb après le premier coup
+--> Essayer d'animer le curseur lors du déplacement (pas de téléportation)
+Permettre de faire des rectangles comme taille de grille (et pas que des carrés)
+Ajouter des paramètres pour l'IA :
+- Vitesse,
+- Inclure les probabilités ou pas,
+- 
