@@ -17,7 +17,40 @@ namespace Demineur
         public bool IsBomb { get; set; }
         public bool IsShowed { get; set; }
         public bool IsFlagged { get; set; }
-        public int NbBombsAroud { get; set; }
+        public int nbBombsAround;
+        public int NbBombsAroud {
+            get => nbBombsAround;
+            set {
+                nbBombsAround = value;
+                switch (value)
+                {
+                    case 1:
+                        Btn.ForeColor = Color.Blue;
+                        break;
+                    case 2:
+                        Btn.ForeColor = Color.Green;
+                        break;
+                    case 3:
+                        Btn.ForeColor = Color.Red;
+                        break;
+                    case 4:
+                        Btn.ForeColor = Color.Violet;
+                        break;
+                    case 5:
+                        Btn.ForeColor = Color.DarkRed;
+                        break;
+                    case 6:
+                        Btn.ForeColor = Color.Turquoise;
+                        break;
+                    case 7:
+                        Btn.ForeColor = Color.Black;
+                        break;
+                    case 8:
+                        Btn.ForeColor = Color.Gray;
+                        break;
+                }
+            }
+        }
 
         public Cell(int X, int Y, int Width, Form frm)
         {
@@ -27,6 +60,7 @@ namespace Demineur
             this.IsFlagged = false;
             Btn = new Button();
             Btn.Name = X + "." + Y;
+            Btn.Font = new Font(FontFamily.GenericSansSerif, (float)8.25, FontStyle.Bold);
             Btn.Size = new System.Drawing.Size(new System.Drawing.Point(Width, Width));
             Btn.Location = new System.Drawing.Point(X*Width, Y * Width);
             frm.Controls.Add(Btn);

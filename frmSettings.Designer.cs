@@ -35,16 +35,16 @@ namespace Demineur
             this.rb16 = new System.Windows.Forms.RadioButton();
             this.rb20 = new System.Windows.Forms.RadioButton();
             this.btnCommencer = new System.Windows.Forms.Button();
-            this.btnCommencerAI = new System.Windows.Forms.Button();
             this.nudSize = new System.Windows.Forms.NumericUpDown();
             this.rbAutre = new System.Windows.Forms.RadioButton();
+            this.cbAI = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudSize)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 16);
+            this.label1.Location = new System.Drawing.Point(18, 17);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 13);
@@ -55,7 +55,7 @@ namespace Demineur
             // 
             this.rb8.AutoSize = true;
             this.rb8.Checked = true;
-            this.rb8.Location = new System.Drawing.Point(109, 16);
+            this.rb8.Location = new System.Drawing.Point(116, 17);
             this.rb8.Margin = new System.Windows.Forms.Padding(1);
             this.rb8.Name = "rb8";
             this.rb8.Size = new System.Drawing.Size(93, 17);
@@ -67,7 +67,7 @@ namespace Demineur
             // rb16
             // 
             this.rb16.AutoSize = true;
-            this.rb16.Location = new System.Drawing.Point(109, 45);
+            this.rb16.Location = new System.Drawing.Point(116, 46);
             this.rb16.Margin = new System.Windows.Forms.Padding(1);
             this.rb16.Name = "rb16";
             this.rb16.Size = new System.Drawing.Size(105, 17);
@@ -78,7 +78,7 @@ namespace Demineur
             // rb20
             // 
             this.rb20.AutoSize = true;
-            this.rb20.Location = new System.Drawing.Point(109, 75);
+            this.rb20.Location = new System.Drawing.Point(116, 76);
             this.rb20.Margin = new System.Windows.Forms.Padding(1);
             this.rb20.Name = "rb20";
             this.rb20.Size = new System.Drawing.Size(105, 17);
@@ -88,36 +88,25 @@ namespace Demineur
             // 
             // btnCommencer
             // 
-            this.btnCommencer.Location = new System.Drawing.Point(13, 141);
+            this.btnCommencer.Location = new System.Drawing.Point(20, 142);
             this.btnCommencer.Margin = new System.Windows.Forms.Padding(1);
             this.btnCommencer.Name = "btnCommencer";
-            this.btnCommencer.Size = new System.Drawing.Size(84, 22);
+            this.btnCommencer.Size = new System.Drawing.Size(201, 39);
             this.btnCommencer.TabIndex = 4;
             this.btnCommencer.Text = "Commencer";
             this.btnCommencer.UseVisualStyleBackColor = true;
             this.btnCommencer.Click += new System.EventHandler(this.btnCommencer_Click);
             // 
-            // btnCommencerAI
-            // 
-            this.btnCommencerAI.Location = new System.Drawing.Point(109, 141);
-            this.btnCommencerAI.Margin = new System.Windows.Forms.Padding(1);
-            this.btnCommencerAI.Name = "btnCommencerAI";
-            this.btnCommencerAI.Size = new System.Drawing.Size(84, 22);
-            this.btnCommencerAI.TabIndex = 5;
-            this.btnCommencerAI.Text = "Commencer AI";
-            this.btnCommencerAI.UseVisualStyleBackColor = true;
-            this.btnCommencerAI.Click += new System.EventHandler(this.btnCommencerAI_Click);
-            // 
             // nudSize
             // 
-            this.nudSize.Location = new System.Drawing.Point(169, 106);
+            this.nudSize.Location = new System.Drawing.Point(176, 107);
             this.nudSize.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
             this.nudSize.Name = "nudSize";
-            this.nudSize.Size = new System.Drawing.Size(120, 20);
+            this.nudSize.Size = new System.Drawing.Size(45, 20);
             this.nudSize.TabIndex = 6;
             this.nudSize.Value = new decimal(new int[] {
             25,
@@ -128,7 +117,7 @@ namespace Demineur
             // rbAutre
             // 
             this.rbAutre.AutoSize = true;
-            this.rbAutre.Location = new System.Drawing.Point(109, 106);
+            this.rbAutre.Location = new System.Drawing.Point(116, 107);
             this.rbAutre.Margin = new System.Windows.Forms.Padding(1);
             this.rbAutre.Name = "rbAutre";
             this.rbAutre.Size = new System.Drawing.Size(56, 17);
@@ -136,16 +125,24 @@ namespace Demineur
             this.rbAutre.Text = "Autre :";
             this.rbAutre.UseVisualStyleBackColor = true;
             // 
+            // cbAI
+            // 
+            this.cbAI.AutoSize = true;
+            this.cbAI.Location = new System.Drawing.Point(20, 46);
+            this.cbAI.Name = "cbAI";
+            this.cbAI.Size = new System.Drawing.Size(42, 17);
+            this.cbAI.TabIndex = 8;
+            this.cbAI.Text = "AI?";
+            this.cbAI.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(404, 297);
+            this.ClientSize = new System.Drawing.Size(245, 203);
+            this.Controls.Add(this.cbAI);
             this.Controls.Add(this.rbAutre);
             this.Controls.Add(this.nudSize);
-            this.Controls.Add(this.btnCommencerAI);
             this.Controls.Add(this.btnCommencer);
             this.Controls.Add(this.rb20);
             this.Controls.Add(this.rb16);
@@ -168,8 +165,8 @@ namespace Demineur
         private System.Windows.Forms.RadioButton rb16;
         private System.Windows.Forms.RadioButton rb20;
         private System.Windows.Forms.Button btnCommencer;
-        private System.Windows.Forms.Button btnCommencerAI;
         private System.Windows.Forms.NumericUpDown nudSize;
         private System.Windows.Forms.RadioButton rbAutre;
+        private System.Windows.Forms.CheckBox cbAI;
     }
 }

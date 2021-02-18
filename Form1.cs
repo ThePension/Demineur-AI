@@ -15,7 +15,7 @@ namespace Demineur
             InitializeComponent();
             frmSettings = frm;
             DefSize = size;
-            nbBomb = DefSize * DefSize / 5;
+            nbBomb = DefSize * DefSize / 8;
             InitialisationGrille(DefSize);
         }
         public void RemoveAllButtons(int size)

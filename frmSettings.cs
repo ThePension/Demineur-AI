@@ -23,20 +23,18 @@ namespace Demineur
             if (rb8.Checked) size = 8;
             if (rb16.Checked) size = 16;
             if (rb20.Checked) size = 20;
-            frmDemineur frmDem = new frmDemineur(size, this);
-            this.Hide();
-            frmDem.ShowDialog();
-        }
-
-        private void btnCommencerAI_Click(object sender, EventArgs e)
-        {
-            if (rb8.Checked) size = 8;
-            if (rb16.Checked) size = 16;
-            if (rb20.Checked) size = 20;
-            if (rbAutre.Checked) size = Convert.ToInt32(nudSize.Value);
-            frmDemineurAI frmDemAI = new frmDemineurAI(size, this);
-            this.Hide();
-            frmDemAI.ShowDialog();
+            if (cbAI.Checked)
+            {
+                frmDemineurAI frmDemAI = new frmDemineurAI(size, this);
+                this.Hide();
+                frmDemAI.ShowDialog();
+            }
+            else
+            {
+                frmDemineur frmDem = new frmDemineur(size, this);
+                this.Hide();
+                frmDem.ShowDialog();
+            }   
         }
     }
 }
