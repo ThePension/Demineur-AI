@@ -8,16 +8,15 @@ namespace Demineur
         Cell[,] Grille;
         frmSettings frmSettings;
         int DefSize = 8;
+        bool IsFirstClicked = true;
         int nbBomb;
         public frmDemineur(int size, frmSettings frm)
         {
             InitializeComponent();
             frmSettings = frm;
             DefSize = size;
-            nbBomb = DefSize * DefSize / 10;
+            nbBomb = DefSize * DefSize / 5;
             InitialisationGrille(DefSize);
-            SetBomb(DefSize, nbBomb);
-            SetNbBombAround(DefSize);
         }
         public void RemoveAllButtons(int size)
         {
@@ -42,7 +41,7 @@ namespace Demineur
                 }
             }
         }
-        public void SetBomb(int size,int nb)
+        public void SetBomb(int size,int nb, int xClicked, int yClicked)
         {
             Random rand = new Random();
             int x, y;
@@ -52,8 +51,24 @@ namespace Demineur
                 y = rand.Next(0, size - 1);
                 if (!Grille[x, y].IsBomb)
                 {
-                    Grille[x, y].IsBomb = true;
-                    nb--;
+                    // Si la case n'est pas la case cliquée
+                    if (x != xClicked && y != yClicked)
+                    {
+                        // Si la case n'est pas une case autour de la case cliquée
+                        if ((x != xClicked - 1 && y != yClicked - 1) &&
+                            (x != xClicked && y != yClicked - 1) &&
+                            (x != xClicked + 1 && y != yClicked - 1) &&
+                            (x != xClicked - 1 && y != yClicked) &&
+                            (x != xClicked + 1 && y != yClicked) &&
+                            (x != xClicked - 1 && y != yClicked + 1) &&
+                            (x != xClicked && y != yClicked + 1) &&
+                            (x != xClicked + 1 && y != yClicked + 1))
+                        {
+
+                            Grille[x, y].IsBomb = true;
+                            nb--;
+                        }
+                    }
                 }
             } while (nb != 0);
         }
@@ -143,6 +158,15 @@ namespace Demineur
             Cell cellClicked;
             cellClicked = Grille[Convert.ToInt32(btn.Name.Split('.')[0]), 
                                  Convert.ToInt32(btn.Name.Split('.')[1])];
+
+            // Si c'est le premier coup
+            if (IsFirstClicked)
+            {
+                IsFirstClicked = false;
+                SetBomb(DefSize, nbBomb, cellClicked.X, cellClicked.Y);
+                SetNbBombAround(DefSize);
+            }
+
             if (me.Button == MouseButtons.Right && !cellClicked.IsShowed)
             {
                 if(cellClicked.Btn.Image != null)
@@ -167,8 +191,7 @@ namespace Demineur
                         RemoveAllButtons(DefSize);
                         Grille = null;
                         InitialisationGrille(DefSize);
-                        SetBomb(DefSize, nbBomb);
-                        SetNbBombAround(DefSize);
+                        IsFirstClicked = true;
                     }
                 }
                 else if(cellClicked.Btn.Image == null)
@@ -188,8 +211,7 @@ namespace Demineur
                     RemoveAllButtons(DefSize);
                     Grille = null;
                     InitialisationGrille(DefSize);
-                    SetBomb(DefSize, nbBomb);
-                    SetNbBombAround(DefSize);
+                    IsFirstClicked = true;
                 }
                 return;
             }

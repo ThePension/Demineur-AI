@@ -11,6 +11,7 @@ namespace Demineur
         int nbRecursion = 0;
         List<Cell> lstCellToCheck = new List<Cell>();
         frmSettings frmSettings;
+        bool IsFirstClick = true;
         int DefSize = 8;
         int nbBomb;
         public frmDemineurAI(int size, frmSettings frm)
@@ -18,7 +19,7 @@ namespace Demineur
             InitializeComponent();
             frmSettings = frm;
             DefSize = size;
-            nbBomb = DefSize * DefSize / 10;
+            nbBomb = DefSize * DefSize / 5;
             InitialisationGrille(DefSize);
         }
         public void RemoveAllButtons(int size)
@@ -43,12 +44,12 @@ namespace Demineur
                     Grille[x, y].Btn.MouseDown += new MouseEventHandler(btnCell_Click);
                 }
             }
-            SetBomb(DefSize, nbBomb);
-            SetNbBombAround(DefSize);
+            // SetBomb(DefSize, nbBomb);
+            // SetNbBombAround(DefSize);
             await Task.Delay(TimeSpan.FromMilliseconds(1000));
             RandomMove();
         }
-        public void SetBomb(int size, int nb)
+        public void SetBomb(int size, int nb, int xClicked, int yClicked)
         {
             Random rand = new Random();
             int x, y;
@@ -56,10 +57,27 @@ namespace Demineur
             {
                 x = rand.Next(0, size - 1);
                 y = rand.Next(0, size - 1);
+
+                // Si la case n'est pas déjà une bombe
                 if (!Grille[x, y].IsBomb)
                 {
-                    Grille[x, y].IsBomb = true;
-                    nb--;
+                    // Si la case n'est pas la case cliquée
+                    if (x != xClicked && y != yClicked)
+                    {
+                        // Si la case n'est pas une case autour de la case cliquée
+                        if ((x != xClicked-1 && y != yClicked-1) &&
+                            (x != xClicked && y != yClicked - 1) &&
+                            (x != xClicked+1 && y != yClicked-1) &&
+                            (x != xClicked-1 && y != yClicked)   &&
+                            (x != xClicked+1 && y != yClicked)   &&
+                            (x != xClicked-1 && y != yClicked+1) &&
+                            (x != xClicked   && y != yClicked+1) &&
+                            (x != xClicked+1 && y != yClicked+1)) {
+
+                            Grille[x, y].IsBomb = true;
+                            nb--;
+                        }
+                    }
                 }
             } while (nb != 0);
         }
@@ -140,17 +158,22 @@ namespace Demineur
         }
         public async void btnCell_Click(object sender, MouseEventArgs e)
         {
-            // create X,Y point (0,0) explicitly with System.Drawing 
-            // System.Drawing.Point leftTop = new System.Drawing.Point(Location.X+20, Location.Y+50);
-            // this.Location;
-            // set mouse position
-            // Cursor.Position = leftTop;
             nbRecursion++;
             Button btn = (Button)sender;
             MouseEventArgs me = (MouseEventArgs)e;
             Cell cellClicked;
             cellClicked = Grille[Convert.ToInt32(btn.Name.Split('.')[0]),
                                  Convert.ToInt32(btn.Name.Split('.')[1])];
+
+            // Si c'est le premier coup 
+            if (IsFirstClick)
+            {
+                IsFirstClick = false;
+                SetBomb(DefSize, nbBomb, cellClicked.X, cellClicked.Y);
+                SetNbBombAround(DefSize);
+            }
+
+
             if (me.Button == MouseButtons.Right && !cellClicked.IsShowed)
             {
                 if (cellClicked.Btn.Image != null)
