@@ -1,1 +1,1 @@
-"# D‚mineur avec intelligence artificielle" 
+"DÃ©mineur en C# WinForm, avec IA" 
